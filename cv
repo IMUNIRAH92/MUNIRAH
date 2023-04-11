@@ -1,0 +1,31 @@
+
+html
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Barcode Page</title>
+	<script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+</head>
+<body>
+	<div id="barcode"></div>
+	<div id="options">
+		<h3>Choose an option:</h3>
+		<button onclick="window.open('file1.pdf')">Option 1</button>
+		<button onclick="window.open('file2.pdf')">Option 2</button>
+	</div>
+	<script>
+		// Generate barcode with link to options page
+		var url = "http://example.com/options.html";
+		JsBarcode("#barcode", url, { format: "CODE128", displayValue: false });
+
+		// Open PDF files on button click
+		document.getElementById("options").addEventListener("click", function(e) {
+			if (e.target.tagName === "BUTTON") {
+				e.preventDefault();
+				window.open(e.target.getAttribute("onclick").match(/'(.*?)'/)[1]);
+				return false;
+			}
+		});
+	</script>
+</body>
+</html>
